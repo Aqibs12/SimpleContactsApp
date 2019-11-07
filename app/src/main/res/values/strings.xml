@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">ContactsApp</string>
+
+    <string name="name">Name</string>
+    <string name="tel">Telephone</string>
+    <string name="email">Email</string>
+    <string name="add_contact">Add Contact</string>
+
+    <string name="sample_name">Asare Philip</string>
+    <string name="sample_email">asarebarfour@outlook.com</string>
+    <string name="sample_tel">0244239586</string>
+    <string name="empty_not_saved">Contact empty, not saved</string>
+
+    <string name="edit_contact">Edit Contact</string>
+    <string name="delete_contact">Delete Contact</string>
+    <string name="update_contact">Update</string>
+    <string name="cancel">Cancel</string>
+</resources>

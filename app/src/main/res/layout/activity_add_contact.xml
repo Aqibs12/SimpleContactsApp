@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/name"
+        style="@style/new_cantact_label"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/edt_name"
+        android:inputType="textCapWords|textCapSentences"
+        android:hint="@string/sample_name"
+        style="@style/new_cantact_text"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/tel"
+        style="@style/new_cantact_label"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/edt_tel"
+        android:inputType="numberDecimal"
+        android:hint="@string/sample_tel"
+        style="@style/new_cantact_text" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="@string/email"
+        style="@style/new_cantact_label"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:id="@+id/edt_email"
+        android:inputType="textEmailAddress"
+        android:hint="@string/sample_email"
+        style="@style/new_cantact_text"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_add_contact"
+        android:text="@string/add_contact"/>
+
+</LinearLayout>
