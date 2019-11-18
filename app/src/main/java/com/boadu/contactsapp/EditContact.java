@@ -9,10 +9,15 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -30,6 +35,9 @@ public class EditContact extends AppCompatActivity implements  View.OnClickListe
     Button btnEditContact, btnDeleteContact;
     Button btnCancelEdit, btnUpdateContact;
     String[] contactDetails = null;
+    PackageManager packageManager;
+    ClipboardManager clipboardManager;
+
 
     /**
      * {@link ContactViewModel} to perform database transactions
@@ -76,11 +84,20 @@ public class EditContact extends AppCompatActivity implements  View.OnClickListe
         btnUpdateContact.setOnClickListener(buttonClickListener);
 
         edtEditEmail.setEnabled(false);
+        edtEditEmail.setTextIsSelectable(true);
         edtEditName.setEnabled(false);
+        edtEditName.setTextIsSelectable(true);
         edtEditTel.setEnabled(false);
+        edtEditTel.setTextIsSelectable(true);
         btnUpdateContact.setEnabled(false);
 
         Intent intent = getIntent();
+
+
+
+        packageManager = this.getPackageManager();
+        clipboardManager = (android.content.ClipboardManager) getSystemService(this.CLIPBOARD_SERVICE);
+
 
         //Get contact details passed into this Activity from the calling Activity
         if(intent.hasExtra("CONTACT_DETAILS")){
@@ -203,6 +220,19 @@ public class EditContact extends AppCompatActivity implements  View.OnClickListe
                         Toast.makeText(getApplicationContext(), "Invalid phone number", Toast.LENGTH_SHORT).show();
 
                     }
+
+                    //Dial phone number
+                case R.id.edt_edit_tel:
+                    if(!edtEditTel.isEnabled()){
+                        Log.i("Tel editext Clicked", "Clicke telephone in disabled mode");
+                        placeCall(getText(edtEditTel));
+                    }
+                case  R.id.edt_edit_email:
+                    if(!edtEditTel.isEnabled()){
+                        Log.i("Email editext Clicked", "Clicke email in disabled mode");
+                        sendEmail(getText(edtEditEmail));
+                    }
+
             }
         }
     };
@@ -228,6 +258,52 @@ public class EditContact extends AppCompatActivity implements  View.OnClickListe
      */
     public boolean isValidTel(String tel){
         return (!TextUtils.isEmpty(tel)) && Pattern.matches("\\d{10}", tel);
+    }
+
+
+
+    /**
+     * Opens the System Dialer Application with the given telephone number displayed
+     * @param phoneNumber String object , a telephone number
+     */
+    private void placeCall(String phoneNumber){
+        Intent dialer = new Intent(Intent.ACTION_DIAL);
+        dialer.setData(Uri.parse("tel:"+ phoneNumber));
+        if(dialer.resolveActivity(packageManager) != null){
+            startActivity(dialer);
+        }else{
+            Toast.makeText(this, "Package manager empty", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * Takes three String objects as paremeter, sends an Email through the System
+     * Default Mailer Application.
+     * @param email email address, a string object
+     */
+    private void sendEmail(String email){
+        Intent sendMail = new Intent(Intent.ACTION_SENDTO);
+        sendMail.setData(Uri.parse("mailto:"));
+        sendMail.putExtra(Intent.EXTRA_EMAIL, email);
+
+        if (sendMail.resolveActivity(packageManager) != null) {
+            Toast.makeText(this, "Package manager not  empty", Toast.LENGTH_SHORT).show();
+            startActivity(sendMail);
+        }else{
+            Toast.makeText(this, "Package manager empty", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+    /**
+     * Copies text(String) to System Clipboard
+     * @param text Text that will be copied to clipboard, String Object.
+     */
+    private void copyText(String text){
+        ClipData clipData = ClipData.newPlainText("info", text);
+        clipboardManager.setPrimaryClip(clipData);
+
     }
 
 

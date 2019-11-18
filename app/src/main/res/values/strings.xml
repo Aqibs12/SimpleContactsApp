@@ -15,4 +15,8 @@
     <string name="delete_contact">Delete Contact</string>
     <string name="update_contact">Update</string>
     <string name="cancel">Cancel</string>
+
+    <string name="user_image">User\'s picture</string>
+
+
 </resources>
