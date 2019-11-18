@@ -107,7 +107,7 @@ public class ContactListAdapter extends RecyclerView.Adapter<ContactListAdapter.
                     }
                 }
 
-                Intent editContactIntent = new Intent(mContext , EditContact.class);
+                Intent editContactIntent = new Intent(mContext , ViewContact.class);
                 editContactIntent.putExtra("CONTACT_DETAILS", contactDetails);
                 mContext.startActivity(editContactIntent);
             }

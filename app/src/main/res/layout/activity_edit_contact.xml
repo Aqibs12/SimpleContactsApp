@@ -4,28 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="@string/edit_contact"
-            android:id="@+id/btn_edit_contact"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/delete_contact"
-            android:id="@+id/btn_delete_contact"/>
-    </LinearLayout>
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="40dp"
@@ -83,6 +61,14 @@
             android:layout_weight="1"
             android:text="@string/update_contact"
             android:id="@+id/btn_update_contact"/>
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/delete_contact"
+            android:id="@+id/btn_delete_contact"/>
     </LinearLayout>
 
 
